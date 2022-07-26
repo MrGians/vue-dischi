@@ -19,7 +19,7 @@ export default {
 header {
   height: 50px;
   padding: 0.5rem;
-  background-color: $primary_color;
+  background-color: $secondary_color;
 
   #navbar {
     img {
