@@ -3,16 +3,13 @@
     <div id="discs-list">
       <div class="container">
         <div class="row py-5">
-          <div class="col py-3">
+          <div v-for="disc in discsList" :key="disc.title" class="col py-3">
             <!-- TODO Component Card -->
             <div class="disc-card">
-              <img
-                src="https://images-na.ssl-images-amazon.com/images/I/41JD3CW65HL.jpg"
-                alt="test"
-              />
-              <h6 class="disc-name">New Jersey</h6>
-              <div class="artist">Bon Jovi</div>
-              <div class="date">1998</div>
+              <img :src="disc.poster" :alt="disc.title" />
+              <h6 class="disc-name">{{ disc.title }}</h6>
+              <div class="artist">{{ disc.author }}</div>
+              <div class="date">{{ disc.year }}</div>
             </div>
             <!-- TODO -->
           </div>
@@ -25,6 +22,9 @@
 <script>
 export default {
   name: "BaseMain",
+  props: {
+    discsList: Array,
+  },
 };
 </script>
 

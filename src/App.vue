@@ -1,7 +1,7 @@
 <template>
   <div>
     <BaseHeader />
-    <BaseMain />
+    <BaseMain :discs-list="discsList" />
   </div>
 </template>
 
