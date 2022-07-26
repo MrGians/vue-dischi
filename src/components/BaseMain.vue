@@ -1,6 +1,9 @@
 <template>
   <main>
-    <div id="discs-list">
+    <!-- Loader -->
+    <TheLoader v-if="discsList.length !== 10" />
+    <!-- Discs List -->
+    <div v-else id="discs-list">
       <div class="container">
         <div class="row py-5">
           <div v-for="disc in discsList" :key="disc.title" class="col py-3">
@@ -14,9 +17,10 @@
 
 <script>
 import DiscCard from "./DiscCard.vue";
+import TheLoader from "./TheLoader.vue";
 export default {
   name: "BaseMain",
-  components: { DiscCard },
+  components: { DiscCard, TheLoader },
   props: {
     discsList: Array,
   },
