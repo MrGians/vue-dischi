@@ -5,7 +5,7 @@
     <!-- Discs List -->
     <div v-else id="discs-list">
       <div class="container">
-        <div class="row py-5">
+        <div class="row py-3">
           <div v-for="disc in discsList" :key="disc.title" class="col py-3">
             <DiscCard :disc="disc" />
           </div>
