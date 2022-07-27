@@ -1,5 +1,5 @@
 <template>
-  <select class="form-select" @change="setOptionValue">
+  <select @change="setOptionValue">
     <option value="" selected>{{ customOption }}</option>
     <option v-for="option in options" :key="option" :value="option">
       {{ option }}
@@ -22,5 +22,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

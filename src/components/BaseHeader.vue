@@ -4,10 +4,17 @@
       <div id="navbar">
         <img src="./../assets/img/logo.svg" alt="Spotify Logo" />
         <div class="search-filters">
+          <!-- Disc Genre Select -->
           <BaseSelect
-            @selected-value="selectedValue"
+            @selected-value="selectedGenreValue"
             :options="genreList"
             custom-option="Seleziona un genere"
+          />
+          <!-- Artist Name Select -->
+          <BaseSelect
+            @selected-value="selectedArtistValue"
+            :options="artistList"
+            custom-option="Seleziona un artista"
           />
         </div>
       </div>
@@ -22,11 +29,16 @@ export default {
   components: { BaseSelect },
   props: {
     genreList: Array,
+    artistList: Array,
   },
   methods: {
-    selectedValue(value) {
+    selectedGenreValue(value) {
       console.log(2, value);
-      this.$emit("selected-value", value);
+      this.$emit("selected-genre-value", value);
+    },
+    selectedArtistValue(value) {
+      console.log(2, value);
+      this.$emit("selected-artist-value", value);
     },
   },
 };
@@ -47,6 +59,9 @@ header {
       width: 100px;
       height: 100%;
       filter: invert(66%) sepia(61%) saturate(632%) hue-rotate(85deg) brightness(94%) contrast(86%);
+    }
+    .search-filters {
+      display: flex;
     }
   }
 }

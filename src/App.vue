@@ -1,7 +1,16 @@
 <template>
   <div>
-    <BaseHeader @selected-value="setSelectedValue" :genre-list="genreList" />
-    <BaseMain :selected-value="selectedValue" :discs-list="discsList" />
+    <BaseHeader
+      @selected-genre-value="setSelectedGenreValue"
+      :genre-list="genreList"
+      @selected-artist-value="setSelectedArtistValue"
+      :artist-list="artistList"
+    />
+    <BaseMain
+      :selected-genre-value="selectedGenreValue"
+      :selected-artist-value="selectedArtistValue"
+      :discs-list="discsList"
+    />
   </div>
 </template>
 
@@ -20,11 +29,16 @@ export default {
 
         this.discsList.forEach((disc) => {
           if (!this.genreList.includes(disc.genre)) this.genreList.push(disc.genre);
+
+          if (!this.artistList.includes(disc.author)) this.artistList.push(disc.author);
         });
       });
     },
-    setSelectedValue(value) {
-      this.selectedValue = value.toLowerCase();
+    setSelectedGenreValue(value) {
+      this.selectedGenreValue = value.toLowerCase();
+    },
+    setSelectedArtistValue(value) {
+      this.selectedArtistValue = value.toLowerCase();
     },
   },
   data() {
@@ -32,7 +46,9 @@ export default {
       endPoint: "https://flynn.boolean.careers/exercises/api/array/music",
       discsList: [],
       genreList: [],
-      selectedValue: "",
+      artistList: [],
+      selectedGenreValue: "",
+      selectedArtistValue: "",
     };
   },
   mounted() {

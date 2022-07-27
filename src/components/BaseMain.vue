@@ -23,14 +23,32 @@ export default {
   components: { DiscCard, TheLoader },
   props: {
     discsList: Array,
-    selectedValue: String,
+    selectedGenreValue: String,
+    selectedArtistValue: String,
   },
   computed: {
     filteredDiscsList() {
-      if (!this.selectedValue) return this.discsList;
+      // SE Entrambe le stringe sono vuote
+      if (!this.selectedGenreValue && !this.selectedArtistValue) return this.discsList;
 
+      // SE solo il valore "Genere" è stato selezionato
+      if (this.selectedGenreValue && !this.selectedArtistValue) {
+        return this.discsList.filter((disc) => {
+          return disc.genre.toLowerCase() === this.selectedGenreValue;
+        });
+      }
+      // SE solo il valore "Artista" è stato selezionato
+      else if (!this.selectedGenreValue && this.selectedArtistValue) {
+        return this.discsList.filter((disc) => {
+          return disc.author.toLowerCase() === this.selectedArtistValue;
+        });
+      }
+      // SE i valori "Genere" & "Artista" sono stati entrambi selezionati
       return this.discsList.filter((disc) => {
-        return disc.genre.toLowerCase() === this.selectedValue;
+        return (
+          disc.genre.toLowerCase() === this.selectedGenreValue &&
+          disc.author.toLowerCase() === this.selectedArtistValue
+        );
       });
     },
   },
