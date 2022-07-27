@@ -5,10 +5,13 @@
     <!-- Discs List -->
     <div v-else id="discs-list">
       <div class="container">
-        <div class="row py-3">
+        <div v-if="filteredDiscsList.length >= 1" class="row py-3">
           <div v-for="disc in filteredDiscsList" :key="disc.title" class="col py-3">
             <DiscCard :disc="disc" />
           </div>
+        </div>
+        <div v-else>
+          <h2 class="text-center text-light py-5">Non è stato trovato nessun risultato..</h2>
         </div>
       </div>
     </div>
