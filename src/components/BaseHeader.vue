@@ -1,16 +1,34 @@
 <template>
   <header>
-    <div id="navbar">
-      <div class="container-lg">
+    <div class="container-lg">
+      <div id="navbar">
         <img src="./../assets/img/logo.svg" alt="Spotify Logo" />
+        <div class="search-filters">
+          <BaseSelect
+            @selected-value="selectedValue"
+            :options="genreList"
+            custom-option="Seleziona un genere"
+          />
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import BaseSelect from "./BaseSelect.vue";
 export default {
   name: "BaseHeader",
+  components: { BaseSelect },
+  props: {
+    genreList: Array,
+  },
+  methods: {
+    selectedValue(value) {
+      console.log(2, value);
+      this.$emit("selected-value", value);
+    },
+  },
 };
 </script>
 
@@ -22,6 +40,9 @@ header {
   background-color: $secondary_color;
 
   #navbar {
+    display: flex;
+    justify-content: space-between;
+
     img {
       width: 100px;
       height: 100%;

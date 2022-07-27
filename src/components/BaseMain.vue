@@ -6,7 +6,7 @@
     <div v-else id="discs-list">
       <div class="container">
         <div class="row py-3">
-          <div v-for="disc in discsList" :key="disc.title" class="col py-3">
+          <div v-for="disc in filteredDiscsList" :key="disc.title" class="col py-3">
             <DiscCard :disc="disc" />
           </div>
         </div>
@@ -23,6 +23,16 @@ export default {
   components: { DiscCard, TheLoader },
   props: {
     discsList: Array,
+    selectedValue: String,
+  },
+  computed: {
+    filteredDiscsList() {
+      if (!this.selectedValue) return this.discsList;
+
+      return this.discsList.filter((disc) => {
+        return disc.genre.toLowerCase() === this.selectedValue;
+      });
+    },
   },
 };
 </script>

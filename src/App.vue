@@ -1,7 +1,7 @@
 <template>
   <div>
-    <BaseHeader />
-    <BaseMain :discs-list="discsList" />
+    <BaseHeader @selected-value="setSelectedValue" :genre-list="genreList" />
+    <BaseMain :selected-value="selectedValue" :discs-list="discsList" />
   </div>
 </template>
 
@@ -17,13 +17,22 @@ export default {
     getDiscsList() {
       axios.get(this.endPoint).then((res) => {
         this.discsList = res.data.response;
+
+        this.discsList.forEach((disc) => {
+          if (!this.genreList.includes(disc.genre)) this.genreList.push(disc.genre);
+        });
       });
+    },
+    setSelectedValue(value) {
+      this.selectedValue = value.toLowerCase();
     },
   },
   data() {
     return {
       endPoint: "https://flynn.boolean.careers/exercises/api/array/music",
       discsList: [],
+      genreList: [],
+      selectedValue: "",
     };
   },
   mounted() {
